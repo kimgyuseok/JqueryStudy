@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="css/jquery-ui.css">
+   <style>
+
+      body { width: 800px; margin: 20px auto; }
+
+      #search {
+         border: 1px solid #999;
+         border-radius: 5px;
+         padding: 15px;
+         margin: 20px;
+      }
+
+      #price {
+         margin: 20px;
+      }
+
+      .item {
+         border: 1px solid #999;
+         width: 150px;
+         height: 240px;
+         text-align: center;
+         padding: 20px 10px;
+         margin: 14px;
+         float: left;
+      }
+
+   </style>
+</head>
+<body>
+   <!-- ex16_widgets.html -->
+
+   <h1>상품 목록</h1>
+
+   <div id="search">
+      가격: <span>30,000원 ~ 70,000원</span>
+      <div id="price"></div>
+   </div>
+
+   <div id="list">
+      <div class="item" title="할인 상품!!">
+         <img src="../images/rect_icon01.png" alt="">
+         <div>
+            Lorem, ipsum.
+         </div>
+         <div>5000</div>
+      </div>
+      <div class="item" title="마지막 할인 가격~">
+         <img src="../images/rect_icon02.png" alt="">
+         <div>
+            Suscipit, natus?
+         </div>
+         <div>1000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon03.png" alt="">
+         <div>
+            Quisquam, atque!
+         </div>
+         <div>12000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon04.png" alt="">
+         <div>
+            Officia, debitis.
+         </div>
+         <div>35000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon05.png" alt="">
+         <div>
+            Esse, ab.
+         </div>
+         <div>99000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon06.png" alt="">
+         <div>
+            Accusamus, esse?
+         </div>
+         <div>125000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon07.png" alt="">
+         <div>
+            Eaque, delectus.
+         </div>
+         <div>85000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon08.png" alt="">
+         <div>
+            Voluptatem, fugit!
+         </div>
+         <div>30000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon09.png" alt="">
+         <div>
+            Dolores, mollitia.
+         </div>
+         <div>10000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon10.png" alt="">
+         <div>
+            Sunt, vel!
+         </div>
+         <div>55000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon11.png" alt="">
+         <div>
+            Ipsa, optio!
+         </div>
+         <div>90000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon12.png" alt="">
+         <div>
+            Sapiente, aperiam?
+         </div>
+         <div>22000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon13.png" alt="">
+         <div>
+            Placeat, maxime?
+         </div>
+         <div>70000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon14.png" alt="">
+         <div>
+            Ducimus, cum.
+         </div>
+         <div>38000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon15.png" alt="">
+         <div>
+            Voluptatum, repellendus.
+         </div>
+         <div>62000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon16.png" alt="">
+         <div>
+            Libero, officiis.
+         </div>
+         <div>95000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon17.png" alt="">
+         <div>
+            Autem, recusandae.
+         </div>
+         <div>12000</div>
+      </div>
+      <div class="item">
+         <img src="../images/rect_icon18.png" alt="">
+         <div>
+            Aliquid, similique.
+         </div>
+         <div>28000</div>
+      </div>
+   </div>
+
+
+   <script src="js/jquery-1.12.4.js"></script>
+   <script src="js/jquery-ui.js"></script>
+   <script>
+      
+      $('#price').slider({
+         min: 1000,
+         max: 100000,
+         step: 1000,
+         range: true,
+         values: [ 30000, 70000 ],
+         slide: function(event, ui) {
+            //$('#search > span').text(ui.value);
+            $('#search > span').text(ui.values[0].toLocaleString('ko-KR') + '원 ~ ' + ui.values[1].toLocaleString('ko-KR') + '원');
+
+            checkList(ui.values[0], ui.values[1]);
+         }
+      });
+
+
+      function checkList(low, high) {
+
+         $('#list .item').each(function(index, item) {
+
+            let price = parseInt($(item).children().last().text());
+
+            if (price >= low && price <= high) {
+               $(item).show();
+            } else {
+               $(item).hide();
+            }
+
+         });
+
+      }
+
+      checkList(30000, 70000);
+
+
+      $('*[title]').tooltip({
+         track: true
+      });
+
+   </script>
+</body>
+</html>
